@@ -48,9 +48,14 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
                         className={styles.modal}
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <button className={styles.closeBtn} onClick={onClose}>
-                            <FaTimes />
-                        </button>
+                        <div className={styles.controls}>
+                            <a href="/resume.pdf" download className={styles.downloadBtn}>
+                                Download PDF
+                            </a>
+                            <button className={styles.closeBtn} onClick={onClose}>
+                                <FaTimes />
+                            </button>
+                        </div>
 
                         <Document
                             file="/resume.pdf"

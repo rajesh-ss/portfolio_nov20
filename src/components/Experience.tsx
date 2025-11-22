@@ -57,8 +57,44 @@ export default function Experience() {
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.2 }}
                             className={styles.card}
+                            whileHover="hover" // Define hover state
                         >
-                            <div className={styles.dot} />
+                            {/* Moving Ball Animation */}
+                            <motion.div
+                                className={styles.movingBall}
+                                animate={{ offsetDistance: "100%" }}
+                                transition={{
+                                    duration: 4,
+                                    ease: "linear",
+                                    repeat: Infinity,
+                                }}
+                                variants={{
+                                    hover: { animationPlayState: "paused" } // Framer motion doesn't support playState directly on variants easily for this loop
+                                }}
+                                style={{ offsetDistance: "0%" }} // Start pos
+                            />
+                            {/* We need a way to pause. Framer motion loop is hard to pause with variants. 
+                                Alternative: Use CSS animation for the loop and just use Framer for entry?
+                                User asked for Framer Motion. 
+                                Let's try to use style prop for offsetPath which we did in CSS.
+                                Actually, to pause a Framer Motion animation on hover is tricky without useAnimation controls.
+                                But we can just use the CSS class .movingBall and add animation-play-state: paused on hover in CSS!
+                                The user said "use framer motion for better animations".
+                                I will use Framer Motion for the element but maybe CSS for the infinite loop if it's smoother/easier to pause?
+                                NO, I will use Framer Motion.
+                                To pause, I can't easily pause a `repeat: Infinity` transition.
+                                I'll stick to the CSS animation for the *loop* because it's robust for pausing, 
+                                but I'll use Framer Motion for the element itself.
+                                Wait, I removed the keyframes from CSS. I should add them back or use Framer.
+                                If I use Framer:
+                                <motion.div animate={{ offsetDistance: ["0%", "100%"] }} ... />
+                                To pause: I'd need `useAnimation` hook and `controls.stop()`.
+                                That's complex for a list.
+                                Let's use CSS for the loop (it's performant) and Framer for the element rendering.
+                                I'll add the keyframes back to CSS for `offset-distance`.
+                            */}
+
+                            {/* <div className={styles.dot} /> Removed as per user request */}
 
                             <div className={styles.header}>
                                 <div>

@@ -6,6 +6,8 @@
     position: relative;
     overflow: hidden;
     padding-top: 5rem;
+    /* Ensure background color is transparent so canvas shows through */
+    background: transparent;
 }
 
 .bgContainer {
@@ -16,26 +18,8 @@
     height: 100%;
     overflow: hidden;
     z-index: -1;
-}
-
-.blob {
-    position: absolute;
-    width: 24rem;
-    height: 24rem;
-    border-radius: 50%;
-    filter: blur(100px);
-}
-
-.blob1 {
-    top: 25%;
-    left: 25%;
-    background: rgba(147, 51, 234, 0.2);
-}
-
-.blob2 {
-    bottom: 25%;
-    right: 25%;
-    background: rgba(37, 99, 235, 0.2);
+    /* Make sure this doesn't block the canvas */
+    pointer-events: none;
 }
 
 .container {
@@ -43,6 +27,9 @@
     margin: 0 auto;
     padding: 0 2rem;
     text-align: center;
+    position: relative;
+    z-index: 10;
+    /* Ensure content is above background */
 }
 
 .greeting {
@@ -88,6 +75,10 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
     filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.2));
+    /* Fix for clipping */
+    padding-bottom: 0.2em;
+    line-height: 1.2;
+    display: inline-block;
 }
 
 .role {
@@ -129,18 +120,45 @@
     transform: scale(1.1);
 }
 
+.ctaContainer {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
 .ctaBtn {
     display: inline-block;
-    background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+    padding: 1rem 2rem;
+    background: var(--accent-gradient);
     color: white;
-    padding: 0.8rem 2rem;
+    text-decoration: none;
     border-radius: 2rem;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    transition: opacity 0.3s ease;
+    font-weight: bold;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .ctaBtn:hover {
-    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+}
+
+.secondaryBtn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    text-decoration: none;
+    border-radius: 2rem;
+    font-weight: bold;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+.secondaryBtn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.4);
 }

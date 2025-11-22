@@ -33,8 +33,8 @@ export default function Contact() {
                     </div>
 
                     <div className={styles.socials}>
-                        <SocialLink href="https://github.com" icon={<FaGithub />} />
-                        <SocialLink href="https://linkedin.com" icon={<FaLinkedin />} />
+                        <SocialLink href="https://github.com/rajesh-ss" icon={<FaGithub />} />
+                        <SocialLink href="https://www.linkedin.com/in/rajesh-s-539876155/" icon={<FaLinkedin />} />
                     </div>
                 </motion.div>
 
